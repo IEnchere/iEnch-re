@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
-const authentificate = require("../../middlewares/auth");
+const { auth, restrictTo } = require("../../middlewares/auth");
 
 router.post(
   "/createAuction",
-  authentificate.auth,
+  auth,
+  restrictTo("admin"),
   controllers.auctionControllers.create.createAuction
 );
 
@@ -12,13 +13,15 @@ router.get("/getAuctions", controllers.auctionControllers.get.getAuctionList);
 
 router.delete(
   "/deleteAuction/:id",
-  authentificate.auth,
+  auth,
+  restrictTo("admin"),
   controllers.auctionControllers.delete.deleteAuction
 );
 
 router.put(
   "/updateAuction/:id",
-  authentificate.auth,
+  auth,
+  restrictTo("admin"),
   controllers.auctionControllers.update.updateAuction
 );
 

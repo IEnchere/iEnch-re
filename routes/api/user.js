@@ -7,7 +7,6 @@ const {
 } = require("../../validators/user");
 
 const { auth, restrictTo } = require("../../middlewares/auth");
-// const authentificate = require("../../middlewares/auth");
 
 router.post(
   "/register",
@@ -32,13 +31,17 @@ router.get(
 
 router.delete(
   "/deleteUser/:id",
-  // authentificate.auth,
+  auth,
+  restrictTo("admin", "user"),
   controllers.userControllers.delete.deleteUser
 );
 
 router.put(
   "/updateUser/:id",
-  // authentificate.auth,
+  validateRegisterRequest,
+  isRequestValidated,
+  auth,
+  restrictTo("admin", "user"),
   controllers.userControllers.update.updateUser
 );
 

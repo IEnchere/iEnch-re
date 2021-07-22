@@ -8,12 +8,12 @@ const orderSchema = new mongoose.Schema(
     },
     winBid: [
       {
-        auction: {
+        auctionId: {
           type: Schema.Types.ObjectId,
           ref: "Auction",
           required: true,
         },
-        price: { type: Number, required: true },
+        totalAmount: { type: Number, required: true },
       },
     ],
     user: {

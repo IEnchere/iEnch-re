@@ -22,7 +22,6 @@ module.exports = {
       const currentUserEmail = await services.userServices.get.getUserByEmail(
         email
       );
-      s;
 
       //  checking if e-mail is in use
 

@@ -1,24 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// module.exports = {
-//   auth(req, res, next) {
-//     try {
-//       const token = req.headers.authorization.split(" ")[1];
-//       if (token) {
-//         decodedData = jwt.verify(token, process.env.SECRETKEY);
-//         req.user = decodedData?.id;
-//       }
-//       next();
-//     } catch (err) {
-//       console.log(err);
-//       res.status(403).json({
-//         message: "you need to sign in",
-//       });
-//     }
-//   },
-// };
-
 exports.auth = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
@@ -26,7 +8,7 @@ exports.auth = (req, res, next) => {
       decodedData = jwt.verify(token, process.env.SECRETKEY);
     }
     req.user = decodedData.currentUserEmail;
-    console.log(req.user.role);
+    // console.log(req.user.role);
     next();
   } catch (err) {
     console.log(err);
@@ -35,6 +17,21 @@ exports.auth = (req, res, next) => {
     });
   }
 };
+
+// exports.restrictTo = (...role) => {
+//   return (req, res, next) => {
+//     try {
+//       if (role.includes(req.user.role)) {
+//         next();
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       res.status(403).json({
+//         message: "you need to sign in",
+//       });
+//     }
+//   };
+// };
 
 exports.restrictTo = (...role) => {
   return (req, res, next) => {
