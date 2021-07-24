@@ -19,6 +19,7 @@ module.exports = {
         validity,
         moreInfo,
       } = req.body;
+
       let createdAuction = await Auction.create({
         _id: new mongoose.Types.ObjectId(),
         category,

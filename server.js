@@ -15,6 +15,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 // routes
 app.use(require("./routes"));

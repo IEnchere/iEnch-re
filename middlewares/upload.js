@@ -1,87 +1,60 @@
 const multer = require("multer");
 const sharp = require("sharp");
 
-// store image in memory
-const multerStorage = multer.memoryStorage();
-
-// only able to upload image
+// store image to disk
+const multerstorage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
-    cb((console.log("not an image!"), 400), false);
+    cb(console.log("Not an image!"), false);
   }
 };
 
 const upload = multer({
-  storage: multerStorage,
+  storage: multerstorage,
   fileFilter: multerFilter,
 });
 
-exports.uploadImages = upload.fields([
+exports.uploadAuctionImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
   { name: "images", maxCount: 2 },
 ]);
 
-//  process images
-// exports.customImages = async (req, res, next) => {
-//   console.log(req.files);
-//   next();
-// };
+exports.customAuctionImages = async (req, res, next) => {
+  if (!req.files.imageCover || !req.files.images) return next();
+  // 1-cover Image
+  req.body.imageCover = `auctionCover-${req.params.id}-${new Date()
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ")
+    .replace(/:/g, "-")}.jpeg`;
+  await sharp(req.files.imageCover[0].buffer)
+    .resize(2000, 1333)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`uploads/${req.body.imageCover}`);
 
-exports.customImages = async (req, res, next) => {
-  console.log(req.files);
-  //   try {
-  //     if (!req.files.imageCover || !req.files.images);
+  //  2- Images
+  req.body.images = [];
 
-  //     //   1- Cover image
-  //     const imgCoverFileName = `auction-${
-  //       req.params.id
-  //     }-${Date.now()}-cover.jpeg`;
-  //     await sharp(req.files.imageCover[0].buffer)
-  //       .resize(2000, 1333)
-  //       .toFormat("jpeg")
-  //       .jpeg({ quality: 90 })
-  //       .toFile(`public/img /${imgCoverFileName}`);
+  await Promise.all(
+    req.files.images.map(async (file, i) => {
+      const filename = `auctionBody-${req.params.id}-${new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ")
+        .replace(/:/g, "-")}-${i + 1}.jpeg`;
 
+      await sharp(req.files.imageCover[0].buffer)
+        .resize(2000, 1333)
+        .toFormat("jpeg")
+        .jpeg({ quality: 90 })
+        .toFile(`uploads/${filename}`);
+
+      req.body.images.push(filename);
+    })
+  );
+  console.log();
   next();
 };
-//   } catch (err) {
-//     console.log(err);
-//     res.status(403).json({
-//       status: false,
-//       msg: "something went wrong",
-//     });
-//   }
-// };
-
-// const path = require("path");
-// const multer = require("multer");
-
-// const multerstorage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     let ext = path.extname(file.originalname);
-//     cb(null, Date.now() + ext);
-//   },
-// });
-
-// const multerFilter = (req, file, callback) => {
-//   if (file.mimetype == "image/png" || file.mimetype == "image/jpeg") {
-//     callback(null, true);
-//     if (req.file) {
-//       Auction.imageCover = req.file.path;
-//     }
-//   } else {
-//     console.log("only jpeg and png files are supported");
-//   }
-// };
-
-// const upload = multer({
-//   storage: multerstorage,
-//   fileFilter: multerFilter,
-// });
-
-// module.exports = upload;

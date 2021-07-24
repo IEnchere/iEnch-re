@@ -42,6 +42,7 @@ router.put(
   "/updateUser/:id",
   validateRegisterRequest,
   isRequestValidated,
+  validateDuplication,
   auth,
   restrictTo("admin", "user"),
   controllers.userControllers.update.updateUser

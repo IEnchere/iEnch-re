@@ -1,12 +1,17 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
 const { auth, restrictTo } = require("../../middlewares/auth");
-// const { uploadImages, customImages } = require("../../middlewares/upload");
+const {
+  uploadAuctionImages,
+  customAuctionImages,
+} = require("../../middlewares/upload");
 
 router.post(
   "/createAuction",
   auth,
   restrictTo("admin"),
+  uploadAuctionImages,
+  customAuctionImages,
   controllers.auctionControllers.create.createAuction
 );
 
@@ -23,8 +28,8 @@ router.put(
   "/updateAuction/:id",
   auth,
   restrictTo("admin"),
-  // uploadImages,
-  // customImages,
+  uploadAuctionImages,
+  customAuctionImages,
   controllers.auctionControllers.update.updateAuction
 );
 
