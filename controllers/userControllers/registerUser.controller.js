@@ -1,4 +1,7 @@
-const services = require("../../services");
+const User = require("../../models/User");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // register User
 
@@ -16,45 +19,19 @@ module.exports = {
         role,
       } = req.body;
 
-      const existingPhoneNumber =
-        await services.userServices.get.getUserByPhoneNumber(phoneNumber);
+      // crypt the password
+      const passwordHash = await bcrypt.hash(password, 12);
 
-      const currentUserEmail = await services.userServices.get.getUserByEmail(
-        email
-      );
-
-      //  checking if e-mail is in use
-
-      if (currentUserEmail)
-        return res.status(406).json({
-          status: false,
-          message: "Email already in use",
-        });
-
-      //  checking if phoneNumber is in use
-      if (existingPhoneNumber)
-        return res.status(406).json({
-          status: false,
-          message: "PhoneNumber already in use ",
-        });
-
-      // make the user sure from the password
-
-      if (password !== confirmPassword)
-        return res.status(400).json({
-          status: false,
-          message: "verify the password",
-        });
-
-      const newUser = await services.userServices.create.registerUser(
+      const newUser = await User.create({
+        _id: new mongoose.Types.ObjectId(),
         firstName,
         lastName,
         userName,
         email,
         phoneNumber,
-        password,
-        role
-      );
+        password: passwordHash,
+        role,
+      });
       // console.log(password);
       // console.log(newUser.password);
 
@@ -69,11 +46,3 @@ module.exports = {
     }
   },
 };
-
-//  function to validate the email structure
-
-// function validateEmail(email) {
-//   const re =
-//     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return re.test(email);
-// }

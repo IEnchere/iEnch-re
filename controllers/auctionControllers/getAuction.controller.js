@@ -1,9 +1,9 @@
-const services = require("../../services");
+const Auction = require("../../models/Auction");
 
 module.exports = {
   async getAuctionList(req, res) {
     try {
-      const auctionList = await services.auctionServices.get.getAuctionList();
+      const auctionList = await Auction.find();
       res.status(200).json({
         status: true,
         message: "This is the list of auctions",

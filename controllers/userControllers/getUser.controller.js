@@ -1,9 +1,9 @@
-const services = require("../../services");
+const User = require("../../models/User");
 
 module.exports = {
   async getUserList(req, res) {
     try {
-      const UserList = await services.userServices.get.getUserList();
+      const UserList = await User.find();
       res.status(200).json({
         status: true,
         message: "This is the list of users",

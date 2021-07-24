@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema(
     },
     firstName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     lastName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     userName: {
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
     role: {

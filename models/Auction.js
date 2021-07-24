@@ -15,9 +15,10 @@ const auctionSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    pictures: {
+    imageCover: {
       type: String,
     },
+    images: [String],
     location: {
       type: String,
       required: true,

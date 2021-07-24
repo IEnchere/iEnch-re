@@ -1,5 +1,5 @@
 const { check, validationResult } = require("express-validator");
-// const services = require("../services");
+const User = require("../models/User");
 
 exports.validateRegisterRequest = [
   check("firstName").notEmpty().withMessage("firstName is required"),
@@ -53,4 +53,41 @@ exports.isRequestValidated = (req, res, next) => {
     return res.status(422).json({ error: errors.array() });
   }
   next();
+};
+
+exports.validateDuplication = async (req, res, next) => {
+  try {
+    let { email, phoneNumber, password, confirmPassword } = req.body;
+    const existingPhoneNumber = await User.findOne({ phoneNumber });
+
+    const currentUserEmail = await User.findOne({ email });
+
+    //  checking if e-mail is in use
+
+    if (currentUserEmail)
+      return res.status(406).json({
+        status: false,
+        message: "Email already in use",
+      });
+
+    //  checking if phoneNumber is in use
+    if (existingPhoneNumber)
+      return res.status(406).json({
+        status: false,
+        message: "PhoneNumber already in use ",
+      });
+
+    // make the user sure from the password
+
+    if (password !== confirmPassword)
+      return res.status(400).json({
+        status: false,
+        message: "verify the password",
+      });
+
+    next();
+  } catch (err) {
+    res.status(500).json({ status: false, message: err });
+    console.log(err);
+  }
 };

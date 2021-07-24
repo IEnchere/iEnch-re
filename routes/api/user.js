@@ -4,6 +4,7 @@ const {
   validateRegisterRequest,
   validateSigninRequest,
   isRequestValidated,
+  validateDuplication,
 } = require("../../validators/user");
 
 const { auth, restrictTo } = require("../../middlewares/auth");
@@ -12,6 +13,7 @@ router.post(
   "/register",
   validateRegisterRequest,
   isRequestValidated,
+  validateDuplication,
   controllers.userControllers.create.registerUser
 );
 

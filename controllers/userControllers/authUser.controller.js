@@ -13,10 +13,7 @@ module.exports = {
     try {
       let { email, password } = req.body;
 
-      const currentUserEmail = await services.userServices.get.getUserByEmail(
-        email
-      );
-
+      const currentUserEmail = await User.findOne({ email });
       if (currentUserEmail) {
         await bcrypt.compare(
           password,

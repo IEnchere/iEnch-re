@@ -1,14 +1,12 @@
-const services = require("../../services");
+const Auction = require("../../models/Auction");
 
 module.exports = {
   async deleteAuction(req, res) {
     try {
       const { id } = req.params;
-      const existingAuction = await services.auctionServices.get.getAuctionById(
-        id
-      );
+      const existingAuction = await Auction.findById(id);
       if (existingAuction) {
-        await services.auctionServices.delete.deleteAuction(id);
+        await Auction.findByIdAndRemove(id);
         res
           .status(200)
           .json({ status: true, message: "The auction was removed" });

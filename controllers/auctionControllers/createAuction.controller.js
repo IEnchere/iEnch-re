@@ -1,12 +1,14 @@
-const services = require("../../services");
-const user = require("../../controllers");
+const Auction = require("../../models/Auction");
+const mongoose = require("mongoose");
+
 module.exports = {
   async createAuction(req, res) {
     try {
       let {
         category,
         title,
-        pictures,
+        imageCover,
+        images,
         location,
         shortDesc,
         marketPrice,
@@ -17,11 +19,12 @@ module.exports = {
         validity,
         moreInfo,
       } = req.body;
-
-      const newAuction = await services.auctionServices.create.createAuction(
+      let createdAuction = await Auction.create({
+        _id: new mongoose.Types.ObjectId(),
         category,
         title,
-        pictures,
+        imageCover,
+        images,
         location,
         shortDesc,
         marketPrice,
@@ -30,16 +33,16 @@ module.exports = {
         endDate,
         offerDescription,
         validity,
-        moreInfo
-      );
-
-      res.status(201).json({
+        moreInfo,
+      });
+      res.status(200).json({
         status: true,
-        message: "A new Auction has been created",
-        data: newAuction,
+        message: "the auction was created successfully",
+        createdAuction,
       });
     } catch (err) {
-      res.status(500).json({ status: false, message: err });
+      console.log(err);
+      res.status(500).json({ status: false, err });
     }
   },
 };
