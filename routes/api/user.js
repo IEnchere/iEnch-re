@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const controllers = require("../../controllers");
 const {
+  loginUser,
+  signout,
+} = require("../../controllers/userControllers/authUser.controller");
+const {
   validateRegisterRequest,
   validateSigninRequest,
   isRequestValidated,
@@ -17,12 +21,9 @@ router.post(
   controllers.userControllers.create.registerUser
 );
 
-router.post(
-  "/login",
-  validateSigninRequest,
-  isRequestValidated,
-  controllers.userControllers.authentificate.loginUser
-);
+router.post("/login", validateSigninRequest, isRequestValidated, loginUser);
+
+router.post("/signout", signout);
 
 router.get(
   "/getUsers",
