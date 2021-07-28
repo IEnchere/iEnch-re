@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const path = require("path");
 const app = express();
 
 // Connect to the database (MongoDB)
@@ -15,7 +16,8 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
-// app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // routes
 app.use(require("./routes"));

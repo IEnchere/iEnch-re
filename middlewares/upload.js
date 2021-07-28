@@ -18,7 +18,7 @@ const upload = multer({
 
 exports.uploadAuctionImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
-  { name: "images", maxCount: 2 },
+  { name: "images", maxCount: 20 },
 ]);
 
 exports.customAuctionImages = async (req, res, next) => {
