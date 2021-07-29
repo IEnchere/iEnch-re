@@ -1,11 +1,9 @@
 import "./SignUp.css";
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal, Nav } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { Nav } from "react-bootstrap";
 
 function SignUp(props) {
   const [show, setShow] = useState(false);
@@ -16,7 +14,13 @@ function SignUp(props) {
   return (
     <div className="signin-container">
       <Nav.Link onClick={handleShow}>Créer un compte</Nav.Link>
-      <Modal show={show} onHide={handleClose}>
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={show}
+        onHide={handleClose}
+      >
         <Modal.Header n>
           <Modal.Title id="example-modal-sizes-title-lg">
             Créer un compte
@@ -25,27 +29,41 @@ function SignUp(props) {
         </Modal.Header>
         <Modal.Body>
           <div className="modalContainer">
-            <img src="/sign.png" alt="signIn avatar" className="img-fluid" />
-            <Grid
-              container
-              direction={"column"}
-              spacing={5}
-              className="modalItem"
-            >
+            <img src="/SIGNUP.png" alt="signUp avatar" className="img" />
+            <Grid container direction={"row"} spacing={5} className="modalItem">
               <Grid item>
-                <TextField id="standard-basic" label="Email" />
+                <TextField id="standard-basic" label="Nom" />
               </Grid>
               <Grid item>
-                <TextField id="standard-basic" label="mot de passe " />
+                <TextField id="standard-basic" label="Prénom " />
+              </Grid>
+              <Grid item>
+                <TextField id="standard-basic" label="Email " />
+              </Grid>
+              <Grid item>
+                <TextField id="standard-basic" label="Adresse " />
+              </Grid>
+              <Grid item>
+                <TextField id="standard-basic" label="Mot de passe " />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="standard-basic"
+                  label="Confirmer mot de passe "
+                />
+              </Grid>
+              <Grid item>
+                <TextField id="standard-basic" label="Mobile " />
               </Grid>
             </Grid>
           </div>
           <Button
             className="signIn-btn"
-            variant="primary"
+            variant="warning"
             onClick={handleClose}
           >
-            Se connecter
+            {" "}
+            Enregister
           </Button>
         </Modal.Body>
       </Modal>

@@ -1,11 +1,9 @@
 import "./Signin.css";
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Nav, Button } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { Nav } from "react-bootstrap";
 // import { UserOutlined } from "@ant-design/icons";
 
 function SignIn(props) {
@@ -43,9 +41,10 @@ function SignIn(props) {
           </div>
           <Button
             className="signIn-btn"
-            variant="primary"
+            variant="warning"
             onClick={handleClose}
           >
+            {" "}
             Se connecter
           </Button>
         </Modal.Body>

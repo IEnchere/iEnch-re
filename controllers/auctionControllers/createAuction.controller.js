@@ -7,8 +7,8 @@ module.exports = {
       let {
         category,
         title,
-        imageCover,
-        images,
+        // imageCover,
+        // images,
         location,
         shortDesc,
         marketPrice,
@@ -19,13 +19,18 @@ module.exports = {
         validity,
         moreInfo,
       } = req.body;
+      console.log(req.body);
+
+      // if (req.file) {
+      //   auction.imageCover = req.file.path;
+      // }
 
       let createdAuction = await Auction.create({
         _id: new mongoose.Types.ObjectId(),
         category,
         title,
-        imageCover,
-        images,
+        // imageCover,
+        // images,
         location,
         shortDesc,
         marketPrice,
