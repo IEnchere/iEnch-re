@@ -16,6 +16,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
+// app.use(express.static("./uploads"));
 app.use("/uploads", express.static("uploads"));
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

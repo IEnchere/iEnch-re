@@ -29,17 +29,24 @@ function Navmenu() {
           <Nav className="me-auto">
             <li>
               <NavLink id="menu" className="nav-link" to="Hôtels-et-séjours">
-                Hôtels et séjours
+                Hôtels & séjours
               </NavLink>
             </li>
-            <Nav.Link href="#pricing" id="menu">
-              Restaurants
-            </Nav.Link>
-            <Nav.Link href="#pricing" id="menu">
-              Maison et shopping
-            </Nav.Link>
+            <li>
+              <NavLink
+                id="menu"
+                className="nav-link"
+                to="Restaurants-et-Évènements"
+              >
+                Restaurants & Évènements
+              </NavLink>
+            </li>
+            <li>
+              <NavLink id="menu" className="nav-link" to="Maison-et-shopping">
+                Maison & shopping
+              </NavLink>
+            </li>
           </Nav>
-
           <Button
             aria-controls="simple-menu"
             aria-haspopup="true"

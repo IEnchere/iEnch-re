@@ -18,38 +18,30 @@ const upload = multer({
 
 exports.uploadAuctionImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
-  { name: "images", maxCount: 20 },
+  { name: "images", maxCount: 5 },
 ]);
 
 exports.customAuctionImages = async (req, res, next) => {
   if (!req.files.imageCover || !req.files.images) return next();
   // 1-cover Image
-  req.body.imageCover = `auctionCover-${req.params.id}-${new Date()
-    .toISOString()
-    .slice(0, 19)
-    .replace("T", " ")
-    .replace(/:/g, "-")}.jpeg`;
+  req.body.imageCover = `auctionCover-${req.params.id}.jpeg`;
   await sharp(req.files.imageCover[0].buffer)
     .resize(2000, 1333)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
+    // .toFile(`uploads/${req.body.imageCover}`);
     .toFile(`uploads/${req.body.imageCover}`);
 
   //  2- Images
   req.body.images = [];
-
   await Promise.all(
     req.files.images.map(async (file, i) => {
-      const filename = `auctionBody-${req.params.id}-${new Date()
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " ")
-        .replace(/:/g, "-")}-${i + 1}.jpeg`;
-
-      await sharp(req.files.imageCover[0].buffer)
+      const filename = `auctionBody-${req.params.id}-${i + 1}.jpeg`;
+      await sharp(req.files.images[i].buffer)
         .resize(2000, 1333)
         .toFormat("jpeg")
         .jpeg({ quality: 90 })
+        // .toFile(`uploads/${filename}`);
         .toFile(`uploads/${filename}`);
 
       req.body.images.push(filename);

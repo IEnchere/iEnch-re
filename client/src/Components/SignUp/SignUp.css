@@ -6,10 +6,12 @@
   display: flex;
 }
 
-.img-fluid {
-  width: 150px;
-  margin-right: 10%;
+.img {
+  width: 26%;
+  height: 220px;
+  margin-right: 3%;
   margin-left: 2%;
+  margin-top: 5%;
 }
 .signIn-btn {
   float: right;

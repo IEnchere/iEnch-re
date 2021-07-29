@@ -1,19 +1,19 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import "./AuctionCard.css";
+import { Link } from "react-router-dom";
 
 function AuctionCard({ auction }) {
   return (
     <div className="Card-Container">
-      <Card style={{ width: "18rem" }}>
-        {/* <Link to={`/trailers/${movie.id}`}> */}
-        <Card.Img
-          className="img-container"
-          variant="top"
-          src={`/uploads${auction.imageCover}`}
-        />
-        {/* </Link> */}
+      <Card style={{ width: "22rem" }}>
+        <Link to={`/Detail/${auction.id}`}>
+          <Card.Img
+            className="img-container"
+            variant="top"
+            src={`/uploads/${auction.imageCover}`}
+          />
+        </Link>
         <Card.Body>
           <Card.Title>{auction.title} </Card.Title>
           <Card.Text className="description-container">

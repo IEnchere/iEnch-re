@@ -10,8 +10,8 @@ router.post(
   "/createAuction",
   auth,
   restrictTo("admin"),
-  uploadAuctionImages,
-  customAuctionImages,
+  // uploadAuctionImages,
+  // customAuctionImages,
   controllers.auctionControllers.create.createAuction
 );
 

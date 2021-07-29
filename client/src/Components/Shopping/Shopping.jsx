@@ -3,9 +3,9 @@ import Navmenu from "../NavBar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuctions } from "../../redux/actions/auctionsAction";
 import AuctionCard from "../AuctionCard/AuctionCard";
-import "./Hotel.css";
+import "./Shopping.css";
 
-function Hotel({ auction }) {
+function Shopping({ auction }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAuctions());
@@ -17,9 +17,9 @@ function Hotel({ auction }) {
   return (
     <Fragment>
       <Navmenu />
-      <div className="hotel">
+      <div className="Shopping">
         {auctions.map((auction) =>
-          auction.category === "hotel et séjour" ? (
+          auction.category === "Maison et Shopping" ? (
             <AuctionCard key={auction._id} auction={auction} />
           ) : null
         )}
@@ -28,4 +28,4 @@ function Hotel({ auction }) {
   );
 }
 
-export default Hotel;
+export default Shopping;

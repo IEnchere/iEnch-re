@@ -2,10 +2,9 @@ import React, { useEffect, Fragment } from "react";
 import Navmenu from "../NavBar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuctions } from "../../redux/actions/auctionsAction";
-import AuctionCard from "../AuctionCard/AuctionCard";
-import "./Hotel.css";
+import "./Detail.css";
 
-function Hotel({ auction }) {
+function Detail({ auction }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAuctions());
@@ -17,15 +16,8 @@ function Hotel({ auction }) {
   return (
     <Fragment>
       <Navmenu />
-      <div className="hotel">
-        {auctions.map((auction) =>
-          auction.category === "hotel et séjour" ? (
-            <AuctionCard key={auction._id} auction={auction} />
-          ) : null
-        )}
-      </div>
     </Fragment>
   );
 }
 
-export default Hotel;
+export default Detail;
