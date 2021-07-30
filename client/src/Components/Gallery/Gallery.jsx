@@ -1,20 +1,31 @@
-import React, { useEffect, Fragment } from "react";
-import Navmenu from "../NavBar/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { getAuctions } from "../../redux/actions/auctionsAction";
-import AuctionCard from "../AuctionCard/AuctionCard";
 import "./Gallery.css";
 
-function Gallery() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAuctions());
-    // eslint-disable-next-line
-  }, []);
+import React from "react";
+import { Card } from "react-bootstrap";
 
-  const auctions = useSelector((state) => state.auctionReducer.auctions);
-  console.log(auctions);
-  return <Fragment></Fragment>;
+function Gallery({ auction }) {
+  return (
+    <div className="gallery-container">
+      <div className="bigImg">
+        <Card style={{ width: "47rem" }}>
+          <Card.Img
+            id="big"
+            variant="top"
+            src={`/uploads/${auction.images[0]}`}
+            alt="gallery"
+          />
+          <Card.Body>
+            <Card.Text>Compteur</Card.Text>
+          </Card.Body>
+        </Card>
+      </div>
+      <div className="small-container">
+        <img src={`/uploads/${auction.images[1]}`} alt="a" id="img" />
+        <img src={`/uploads/${auction.images[1]}`} alt="a" id="img" />
+        <img src={`/uploads/${auction.images[1]}`} alt="a" id="img" />
+      </div>
+    </div>
+  );
 }
 
 export default Gallery;

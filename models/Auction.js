@@ -6,6 +6,9 @@ const auctionSchema = new mongoose.Schema(
     auctionId: {
       type: Schema.Types.ObjectId,
     },
+    Id: {
+      type: Number,
+    },
     category: {
       type: String,
       required: true,

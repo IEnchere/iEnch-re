@@ -6,6 +6,7 @@ module.exports = {
     try {
       let {
         category,
+        Id,
         title,
         // imageCover,
         // images,
@@ -28,6 +29,7 @@ module.exports = {
       let createdAuction = await Auction.create({
         _id: new mongoose.Types.ObjectId(),
         category,
+        Id,
         title,
         // imageCover,
         // images,
