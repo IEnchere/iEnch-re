@@ -11,7 +11,7 @@ import Detail from "./Components/DetailPage/Detail";
 
 // import Navmenu from "./Components/NavBar/Navbar";
 
-function App() {
+function App({ auction }) {
   return (
     <div className="App">
       <Router>
@@ -25,8 +25,6 @@ function App() {
             render={() => <Restaurant />}
           />
           <Route path="/Maison-et-shopping" render={() => <Shopping />} />
-          <Route path="/Detail/:id" render={() => <Detail />} />
-          <Route path="/Detail/:id" render={() => <Detail />} />
           <Route path="/Detail/:id" render={() => <Detail />} />
         </Switch>
       </Router>

@@ -7,7 +7,7 @@ function AuctionCard({ auction }) {
   return (
     <div className="Card-Container">
       <Card style={{ width: "22rem" }}>
-        <Link to={`/Detail/${auction.id}`}>
+        <Link to={`/Detail/${auction._id}`}>
           <Card.Img
             className="img-container"
             variant="top"
@@ -26,22 +26,3 @@ function AuctionCard({ auction }) {
 }
 
 export default AuctionCard;
-
-// import React from "react";
-// import { Card } from "antd";
-
-// function AuctionCard({ auction }) {
-//   return (
-//     <div>
-//       <Card
-//         hoverable
-//         style={{ width: 240 }}
-//         cover={<img alt=" couverture" src={auction.imageCover} />}
-//       >
-//         <p>{auction.title}</p>
-//       </Card>
-//     </div>
-//   );
-// }
-
-// export default AuctionCard;

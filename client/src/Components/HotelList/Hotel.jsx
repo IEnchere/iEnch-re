@@ -13,7 +13,7 @@ function Hotel({ auction }) {
   }, []);
 
   const auctions = useSelector((state) => state.auctionReducer.auctions);
-  console.log(auctions);
+
   return (
     <Fragment>
       <Navmenu />

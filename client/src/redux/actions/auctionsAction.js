@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getAuctions = () => (dispatch) => {
   axios
-    .get("/api/getAuctions")
+    .get("/api/auction/getAuctions")
     .then((response) =>
       dispatch({ type: GET_CONTACTS, payload: response.data })
     )

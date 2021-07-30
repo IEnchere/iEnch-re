@@ -1,9 +1,13 @@
 import "./Signin.css";
 import React, { useState } from "react";
-import { Modal, Nav, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { CloseOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import { Nav } from "react-bootstrap";
+import axios from "axios";
+import { signIn } from "../../utils/index";
 // import { UserOutlined } from "@ant-design/icons";
 
 function SignIn(props) {
@@ -11,12 +15,26 @@ function SignIn(props) {
   const handleClose = () => setShow(false);
   // eslint-disable-next-line
   const handleShow = () => setShow(true);
+  const [user, setUser] = useState({});
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  const handleLogin = () => {
+    axios
+      .post("/api/user/login", user)
+      .then((response) => {
+        signIn(response.data.token);
+        alert("LoggedIn");
+        // response.data.check.alert("success");
+      })
+      .catch((error) => alert(error.response.data.error[0].msg));
+  };
 
   return (
     <div className="signin-container">
       <Nav.Link onClick={handleShow}> Se connecter </Nav.Link>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header n>
+        <Modal.Header>
           <Modal.Title id="example-modal-sizes-title-lg">
             Se connecter
           </Modal.Title>
@@ -32,17 +50,24 @@ function SignIn(props) {
               className="modalItem"
             >
               <Grid item>
-                <TextField id="standard-basic" label="Email" />
+                <TextField label="Email" name="email" onChange={handleChange} />
               </Grid>
               <Grid item>
-                <TextField id="standard-basic" label="mot de passe " />
+                <TextField
+                  label="mot de passe "
+                  name="password"
+                  onChange={handleChange}
+                />
               </Grid>
             </Grid>
           </div>
           <Button
             className="signIn-btn"
-            variant="warning"
-            onClick={handleClose}
+            variant="primary"
+            onClick={() => {
+              handleLogin();
+              handleClose();
+            }}
           >
             {" "}
             Se connecter
@@ -54,3 +79,60 @@ function SignIn(props) {
 }
 
 export default SignIn;
+
+// import "./Signin.css";
+// import React, { useState } from "react";
+// import { Modal, Nav, Button } from "react-bootstrap";
+// import TextField from "@material-ui/core/TextField";
+// import Grid from "@material-ui/core/Grid";
+// import { CloseOutlined } from "@ant-design/icons";
+// // import { UserOutlined } from "@ant-design/icons";
+
+// function SignIn(props) {
+//   const [show, setShow] = useState(false);
+//   const handleClose = () => setShow(false);
+//   // eslint-disable-next-line
+//   const handleShow = () => setShow(true);
+
+//   return (
+//     <div className="signin-container">
+//       <Nav.Link onClick={handleShow}> Se connecter </Nav.Link>
+//       <Modal show={show} onHide={handleClose}>
+//         <Modal.Header n>
+//           <Modal.Title id="example-modal-sizes-title-lg">
+//             Se connecter
+//           </Modal.Title>
+//           <CloseOutlined onClick={handleClose} />
+//         </Modal.Header>
+//         <Modal.Body>
+//           <div className="modalContainer">
+//             <img src="/sign.png" alt="signIn avatar" className="img-fluid" />
+//             <Grid
+//               container
+//               direction={"column"}
+//               spacing={5}
+//               className="modalItem"
+//             >
+//               <Grid item>
+//                 <TextField id="standard-basic" label="Email" />
+//               </Grid>
+//               <Grid item>
+//                 <TextField id="standard-basic" label="mot de passe " />
+//               </Grid>
+//             </Grid>
+//           </div>
+//           <Button
+//             className="signIn-btn"
+//             variant="warning"
+//             onClick={handleClose}
+//           >
+//             {" "}
+//             Se connecter
+//           </Button>
+//         </Modal.Body>
+//       </Modal>
+//     </div>
+//   );
+// }
+
+// export default SignIn;
