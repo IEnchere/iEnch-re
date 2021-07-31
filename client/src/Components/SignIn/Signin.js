@@ -8,6 +8,7 @@ import { Button } from "antd";
 import { Nav } from "react-bootstrap";
 import axios from "axios";
 import { signIn } from "../../utils/index";
+// import { Link } from "react-router-dom";
 // import { UserOutlined } from "@ant-design/icons";
 
 function SignIn(props) {
@@ -15,6 +16,7 @@ function SignIn(props) {
   const handleClose = () => setShow(false);
   // eslint-disable-next-line
   const handleShow = () => setShow(true);
+
   const [user, setUser] = useState({});
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,7 +34,10 @@ function SignIn(props) {
 
   return (
     <div className="signin-container">
-      <Nav.Link onClick={handleShow}> Se connecter </Nav.Link>
+      <Nav.Link to="/Connexion" onClick={handleShow}>
+        {" "}
+        Se connecte{" "}
+      </Nav.Link>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title id="example-modal-sizes-title-lg">

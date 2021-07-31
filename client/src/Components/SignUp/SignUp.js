@@ -21,8 +21,8 @@ function SignUp(props) {
         show={show}
         onHide={handleClose}
       >
-        <Modal.Header n>
-          <Modal.Title id="example-modal-sizes-title-lg">
+        <Modal.Header>
+          <Modal.Title to="/Connexion" id="example-modal-sizes-title-lg">
             Créer un compte
           </Modal.Title>
           <CloseOutlined onClick={handleClose} />

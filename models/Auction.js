@@ -42,6 +42,30 @@ const auctionSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    currentPrice: {
+      type: Number,
+    }, // the highest proposed price (filled)
+    proposedBids: [Number], // filled by users when the auction begin
+    biddings: [
+      {
+        type: new mongoose.Schema(
+          {
+            biddingId: String,
+            proposedPrice: {
+              type: Number,
+            },
+            user: {
+              type: Schema.Types.ObjectId,
+              ref: "User",
+              required: true,
+            },
+          },
+
+          { timestamps: true }
+        ),
+      },
+    ],
+
     beginDate: {
       type: Date,
       required: true,

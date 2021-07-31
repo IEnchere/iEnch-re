@@ -3,4 +3,5 @@ module.exports = {
   get: require("./getAuction.controller"),
   update: require("./updateAuction.controller"),
   delete: require("./deleteAuction.controller"),
+  updateBid: require("./updateBid.controller"),
 };

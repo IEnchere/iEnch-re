@@ -62,10 +62,10 @@ function Navmenu() {
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>
-              <SignIn />
+              <SignIn to="Connexion" />
             </MenuItem>
             <MenuItem onClick={handleClose}>
-              <SignUp />
+              <SignUp to="Inscription" />
             </MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>

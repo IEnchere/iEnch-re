@@ -33,4 +33,10 @@ router.put(
   controllers.auctionControllers.update.updateAuction
 );
 
+// router.put(
+//   "/updateAuction/:id/bidding/:biddingId",
+//   auth,
+//   controllers.auctionControllers.updateBid.updateBid
+// );
+
 module.exports = router;

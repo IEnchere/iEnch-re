@@ -7,6 +7,7 @@ import "../DetailPage/Detail.css";
 import Gallery from "../Gallery/Gallery";
 import NavMenu from "../NavBar/Navbar";
 import Counter from "../BidCounter/Counter";
+import Bid from "../Bid/Bid";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function Detail() {
           <div className="gallery">
             <Counter auction={auction} />
             <Gallery auction={auction} />
+            <Bid auction={auction} />
           </div>
         </Fragment>
       ) : (
