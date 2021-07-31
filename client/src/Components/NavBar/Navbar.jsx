@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { UserOutlined } from "@ant-design/icons";
+import {logOut} from "../../utils";
 
 function Navmenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,6 +20,11 @@ function Navmenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+   
+  const handleLogOut= ()=> {
+    logOut()
+};
+
   return (
     <div>
       <Navbar className="navbar-container" collapseOnSelect>
@@ -67,7 +73,7 @@ function Navmenu() {
             <MenuItem onClick={handleClose}>
               <SignUp />
             </MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={() =>{handleClose(); handleLogOut();}}>Se déconnecter</MenuItem>
           </Menu>
         </Container>
       </Navbar>
