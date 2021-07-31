@@ -2,7 +2,7 @@ export function signIn(token) {
   localStorage.setItem("jwt", token);
 }
 
-export function logout() {
+export function logOut() {
   localStorage.clear();
   sessionStorage.clear();
 }
