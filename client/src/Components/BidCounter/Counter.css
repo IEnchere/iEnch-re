@@ -1,0 +1,16 @@
+/* .count {
+  font-weight: bolder;
+}
+
+.counterContainer {
+  background-color: coral;
+  width: 50px !important;
+  border-radius: 20px;
+} */
+
+span {
+  border-radius: 10px;
+
+  font-size: 25px;
+  margin: 3px;
+}

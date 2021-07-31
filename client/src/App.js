@@ -25,7 +25,7 @@ function App({ auction }) {
             render={() => <Restaurant />}
           />
           <Route path="/Maison-et-shopping" render={() => <Shopping />} />
-          <Route path="/Detail/:id" render={() => <Detail />} />
+          <Route path="/:id" render={() => <Detail />} />
         </Switch>
       </Router>
     </div>

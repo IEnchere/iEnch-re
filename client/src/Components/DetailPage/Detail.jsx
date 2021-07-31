@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import "../DetailPage/Detail.css";
 import Gallery from "../Gallery/Gallery";
+import NavMenu from "../NavBar/Navbar";
+import Counter from "../BidCounter/Counter";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -28,14 +30,17 @@ function Detail() {
     <div>
       {auction !== null ? (
         <Fragment>
+          <NavMenu />
+
           <div className="gallery">
-            {/* <img src={`/uploads/${auction.images[0]}`} alt="a" /> */}
+            <Counter auction={auction} />
             <Gallery auction={auction} />
           </div>
         </Fragment>
       ) : (
         <Spinner animation="border" variant="success" />
       )}
+      <div className="bidPart"></div>
     </div>
   );
 }

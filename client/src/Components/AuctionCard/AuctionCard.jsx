@@ -7,7 +7,7 @@ function AuctionCard({ auction }) {
   return (
     <div className="Card-Container">
       <Card style={{ width: "22rem" }}>
-        <Link to={`/Detail/${auction._id}`}>
+        <Link to={`/${auction._id}`}>
           <Card.Img
             className="img-container"
             variant="top"
